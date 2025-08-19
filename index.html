@@ -171,6 +171,139 @@
             color: #c8c8c8;
         }
 
+        /* --- MODIFICATION START: BTC Terminal Styling --- */
+
+        /* This is the wrapper that makes the whole terminal clickable */
+        .terminal-link-wrapper {
+            display: block; /* Ensures the link takes up the full space of the div */
+            text-decoration: none; /* Removes the default underline from the link */
+            color: inherit; /* Makes sure text inside doesn't turn blue */
+            transition: transform 0.3s ease-in-out; /* Smooth scaling effect on hover */
+            margin: 40px auto;
+        }
+
+        .terminal-link-wrapper:hover {
+            transform: scale(1.02); /* Slightly enlarges the terminal on hover */
+        }
+        
+        .terminal-showcase {
+            background: linear-gradient(135deg, 
+                rgba(138, 43, 226, 0.12) 0%, 
+                rgba(50, 0, 100, 0.18) 50%, 
+                rgba(138, 43, 226, 0.12) 100%);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 15px;
+            padding: 30px 35px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Changes the mouse to a pointer to show it's clickable */
+            /* Added new border animation and enhanced existing glow */
+            animation: terminalGlow 4s ease-in-out infinite alternate, 
+                       borderPulse 2s ease-in-out infinite alternate;
+        }
+
+        /* Enhanced the box-shadow glow to be more visible */
+        @keyframes terminalGlow {
+            from { 
+                box-shadow: 0 0 30px rgba(138, 43, 226, 0.2), 
+                           inset 0 0 20px rgba(138, 43, 226, 0.1);
+            }
+            to { 
+                box-shadow: 0 0 50px rgba(138, 43, 226, 0.45), 
+                           inset 0 0 35px rgba(138, 43, 226, 0.2);
+            }
+        }
+        
+        /* NEW animation for a pulsating border glow */
+        @keyframes borderPulse {
+            from {
+                border-color: rgba(138, 43, 226, 0.4);
+            }
+            to {
+                border-color: rgba(218, 112, 214, 0.9);
+            }
+        }
+
+        .terminal-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                rgba(138, 43, 226, 0.15), 
+                transparent
+            );
+            animation: rotate 30s linear infinite;
+            z-index: -1;
+        }
+
+        /* --- MODIFICATION END: BTC Terminal Styling --- */
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .terminal-logo {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8));
+            animation: logoFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoFloat {
+            from { transform: translateY(0px) scale(1); }
+            to { transform: translateY(-5px) scale(1.05); }
+        }
+
+        .terminal-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #8a2be2;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+            background: linear-gradient(45deg, #8a2be2, #da70d6, #8a2be2);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-align: center;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .terminal-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            color: #c0c0c0;
+            text-shadow: 0 0 8px rgba(138, 43, 226, 0.4);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .terminal-description {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            line-height: 1.7;
+            text-align: center;
+            color: #d0d0d0;
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.2);
+        }
+
         /* Skills Section */
         .skills-grid {
             display: grid;
@@ -373,6 +506,19 @@
             .about-content p {
                 margin-bottom: 15px;
             }
+
+            .terminal-link-wrapper {
+                 margin: 30px 10px;
+            }
+
+            .terminal-showcase {
+                padding: 25px;
+            }
+
+            .terminal-header {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -410,6 +556,14 @@
             .floating-quote {
                 display: none; /* Hide floating quotes on very small screens for better performance */
             }
+            
+            .terminal-link-wrapper {
+                margin: 25px 5px;
+            }
+
+            .terminal-showcase {
+                padding: 20px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -444,6 +598,14 @@
             .profile-frame {
                 width: 100px;
                 height: 100px;
+            }
+            
+            .terminal-link-wrapper {
+                margin: 20px auto;
+            }
+
+            .terminal-showcase {
+                padding: 20px;
             }
         }
     </style>
@@ -493,6 +655,35 @@
             <br>
             <p>Now, I stand as a guardian between worlds, wielding ancient wisdom as my blade and unwavering determination as my shield.</p>
         </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- BTC Terminal Showcase Section -->
+    <section class="section fade-in" id="shadow-creation">
+        <h2 class="section-title">The Shadow's Creation</h2>
+        
+        <!-- 
+            HOW TO ADD YOUR LINK:
+            1. Find the href="#" attribute in the <a> tag below.
+            2. Replace the "#" symbol with the full URL to your GitHub repository or project page.
+            Example: href="https://github.com/your-username/your-repository"
+        -->
+        <a href="#" target="_blank" rel="noopener noreferrer" class="terminal-link-wrapper">
+            <div class="terminal-showcase">
+                <div class="terminal-header">
+                    <span class="terminal-logo">🌑</span>
+                    <div>
+                        <h3 class="terminal-title">BTC TERMINAL</h3>
+                        <p class="terminal-subtitle">An Oracle Forged in Chaos</p>
+                    </div>
+                </div>
+                
+                <p class="terminal-description">
+                    From the crucible of market chaos, I have forged an oracle. This is no mere tool, but a sentient codex that whispers prophecies from the digital abyss, wielding a Dual AI Engine to decipher the volatile heart of Bitcoin and visualize its every move through a prophetic, risk-free sandbox.
+                </p>
+            </div>
+        </a>
     </section>
 
     <div class="section-divider"></div>
@@ -607,7 +798,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Optional: stop observing once visible
+                    observer.unobserve(entry.target); // Optional: stop observing once
                 }
             });
         }, observerOptions);
