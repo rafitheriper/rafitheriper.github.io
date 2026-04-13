@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- =============================================
+       CHANGE: Update the browser tab title
+  ============================================= -->
+  <title>Thamidur Rahman Rafi</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; font-weight: 300; background: #111; color: #fff; min-height: 100vh; }
+
+    /* =============================================
+       BACKGROUND IMAGES
+       - Put your image files in the same folder as index.html
+       - Replace 'bg-desktop.jpg' with your wide/landscape image filename
+       - Replace 'bg-mobile.jpg' with your tall/portrait image filename
+       - If you only have one image, use the same filename for both
+    ============================================= */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url('desktop.jpg'); /* <-- CHANGE: desktop background image */
+      background-color: #1a2a1a;              /* fallback colour if image not found */
+      background-size: cover;
+      background-position: center;
+    }
+    @media (max-width: 600px) {
+      .bg { background-image: url('mobile.jpg'); } /* <-- CHANGE: mobile background image */
+    }
+    .bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45); /* darken overlay — raise number to make darker (0.0–1.0) */
+    }
+
+    .page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px 80px; gap: 40px; }
+
+    /* HERO */
+    .hero { text-align: center; padding-top: 20px; }
+    .greeting { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.6); letter-spacing: 2px; margin-bottom: 12px; }
+    .photo-wrap { width: 110px; height: 110px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); overflow: hidden; margin: 0 auto 20px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 300; letter-spacing: 6px; text-transform: uppercase; }
+    .hero .sub { margin-top: 8px; font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+    /* CARD */
+    .card { width: 100%; max-width: 560px; background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 32px 36px; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+
+    /* INFO TABLE */
+    .info-table { display: flex; flex-direction: column; gap: 10px; }
+    .info-row { display: flex; gap: 16px; }
+    .info-key { color: rgba(255,255,255,0.4); letter-spacing: 1px; min-width: 130px; flex-shrink: 0; font-size: 0.75rem; text-transform: uppercase; }
+    .info-val { color: rgba(255,255,255,0.9); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+
+    /* ABOUT POINTS */
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .about-list li { display: flex; gap: 14px; font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .about-list li::before { content: '·'; color: rgba(255,255,255,0.3); flex-shrink: 0; }
+
+    /* LIKES */
+    .likes-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .like-pill { font-size: 0.8rem; padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); }
+
+    /* WORKS */
+    .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .work-tile { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); }
+    .work-tile img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+    .work-img-ph { width: 100%; aspect-ratio: 16/10; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
+    .work-label { padding: 10px 14px; }
+    .work-label h3 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; }
+    .work-label p { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    footer { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+
+    @media (max-width: 480px) {
+      .works-grid { grid-template-columns: 1fr; }
+      .card { padding: 24px 20px; }
+      .info-key { min-width: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="page">
+
+  <!-- =============================================
+       HERO SECTION
+  ============================================= -->
+  <div class="hero">
+
+    <!-- CHANGE: Your greeting text, or delete this line if you don't want one -->
+    <p class="greeting">Hello, World</p>
+
+
+    
+
+    <!-- CHANGE: Your full name -->
+    <h1>Thamidur Rahman Rafi</h1>
+
+    <!-- CHANGE: Short tagline shown under your name (use · as separator) -->
+    <p class="sub"> &nbsp;&nbsp; Sylhet</p>
+
+  </div>
+
+
+  <!-- =============================================
+       ABOUT ME CARD — basic info table
+       To add a row: copy one <div class="info-row"> block and paste it
+       To remove a row: delete the whole <div class="info-row"> block
+  ============================================= -->
+  <div class="card">
+    <p class="card-title">[ About Me ]</p>
+    <div class="info-table">
+
+      <div class="info-row">
+        <span class="info-key">Name</span>
+        <span class="info-val">Thamidur Rahman Rafi</span>   <!-- CHANGE -->
+      </div>
+
+      <div class="info-row">
+        <span class="info-key">Age</span>
+        <span class="info-val"> 17 </span>               <!-- CHANGE -->
+      </div>
+
+      <div class="info-row">
+        <span class="info-key">Country</span>
+        <span class="info-val"> Bangladesh </span>           <!-- CHANGE -->
+      </div>
+
+      <div class="info-row">
+        <span class="info-key">Occupation</span>
+        <span class="info-val">Student </span>        <!-- CHANGE -->
+      </div>
+      <div class="info-row">
+        <span class="info-key">TIME ZONE</span>
+        <span class="info-val"> GMT+6</span>
+      </div>
+
+      <!-- ADD MORE ROWS HERE — copy the block below and fill in -->
+      <!--
+      <div class="info-row">
+        <span class="info-key">Label</span>
+        <span class="info-val">Value</span>
+      </div>
+      -->
+
+    </div>
+  </div>
+
+
+  <!-- =============================================
+       EXTRAS CARD — bullet point facts about you
+       To add: copy one <li> and paste inside the <ul>
+       To remove: delete the whole <li> line
+  ============================================= -->
+  <div class="card">
+    <p class="card-title">[ Extras ]</p>
+    <ul class="about-list">
+
+      <li>A fiction addict </li>
+      <li>VC of a cult</li>   <!-- CHANGE -->
+      <li>INTJ personality type.</li>                 <!-- CHANGE -->
+      <li>I love coffee.</li>
+      <li>I Love nature.</li>
+      <li> I love Cats,Ducks and Seal</li>
+      <li>I sometimes write poems.</li>
+      <li>My favorite singer is Ado.</li>
+      <li>Im a bit of an aesthete</li>         <!-- CHANGE -->
+      <li>You may know me as Frank(my nickname)</li>
+      <li>I'm a really good listener.</li>
+      <li>I'm a night owl.</li>
+      
+
+      <!-- ADD MORE: <li>Your text here.</li> -->
+
+    </ul>
+  </div>
+
+
+  <!-- =============================================
+       STUFF I LIKE CARD — pill tags
+       To add: copy one <span class="like-pill"> and paste
+       To remove: delete the whole <span> line
+  ============================================= -->
+  <div class="card">
+    <p class="card-title">[ Stuff I Like ]</p>
+    <div class="likes-wrap">
+
+      <span class="like-pill">Anime</span>   <!-- CHANGE -->
+      <span class="like-pill">Manga</span>   <!-- CHANGE -->
+      <span class="like-pill">Manhwa</span> <!-- CHANGE -->
+      <span class="like-pill">Music</span>  <!-- CHANGE -->
+      <span class="like-pill">Light Novels</span>
+      <span class="like-pill">Technology</span>
+      <span class="like-pill">Programming</span>
+
+      <!-- ADD MORE: <span class="like-pill">Your Interest</span> -->
+
+    </div>
+  </div>
+
+
+  <!-- =============================================
+       MY WORKS CARD — image + title grid
+       To add a tile: copy one <div class="work-tile"> block and paste
+       To use a real image: replace <div class="work-img-ph"> with:
+         <img src="yourimage.jpg" alt="Project Name">
+       To remove a tile: delete the whole <div class="work-tile"> block
+  ============================================= -->
+  
+
+  <!-- =============================================
+       FOOTER — your name and year
+  ============================================= -->
+  <footer><b>You've reached the end of the page, but hopefully not the end of the journey. Thanks for visiting. 2024 </b></footer>  <!-- CHANGE -->
+
+</div>
+</body>
+</html>
